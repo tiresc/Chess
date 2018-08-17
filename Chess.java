@@ -1,44 +1,87 @@
-import java.util.Arrays;
-
 public class Chess {
-    static int[][] board = new int[][]{
-            { 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0}
+    private static String[][] board = new String[][]{
+            { "\u2002", "\u2002", "\u2002", "\u2002", "\u2002", "\u2002", "\u2002", "\u2002"},
+            { "\u2002", "\u2002", "\u2002", "\u2002", "\u2002", "\u2002", "\u2002", "\u2002"},
+            { "\u2002", "\u2002", "\u2002", "\u2002", "\u2002", "\u2002", "\u2002", "\u2002"},
+            { "\u2002", "\u2002", "\u2002", "\u2002", "\u2002", "\u2002", "\u2002", "\u2002"},
+            { "\u2002", "\u2002", "\u2002", "\u2002", "\u2002", "\u2002", "\u2002", "\u2002"},
+            { "\u2002", "\u2002", "\u2002", "\u2002", "\u2002", "\u2002", "\u2002", "\u2002"},
+            { "\u2002", "\u2002", "\u2002", "\u2002", "\u2002", "\u2002", "\u2002", "\u2002"},
+            { "\u2002", "\u2002", "\u2002", "\u2002", "\u2002", "\u2002", "\u2002", "\u2002"}
 
     };
-    public static void main(String[] args) {
-        int boardNums = 8;
-       // System.out.println("   A B C D E F G H");
+    private static void printBoard() {
         System.out.println("  _A_B_C_D_E_F_G_H_");
+        int boardNums = 8;
         for(int i = 0; i < 8; i++) {
             System.out.printf("%s |", boardNums);
-            boardNums--;
             for(int j = 0; j < 8; j++) {
                 System.out.print(board[i][j]);
                 System.out.print(" ");
             }
+            System.out.printf("| %s", boardNums);
+            boardNums--;
             System.out.println();
-
-        }
-        System.out.print("\u2654");System.out.printf(" White King\n");
-        System.out.print("\u2655");System.out.print(" White Queen\n");
-        System.out.print("\u2656");System.out.print(" White Rook\n");
-        System.out.print("\u2657");System.out.print(" White Bishop\n");
-        System.out.print("\u2658");System.out.print(" White Knight \n");
-        System.out.print("\u2659");System.out.print(" White Pawn\n");
-        System.out.print("\u265A");System.out.printf(" Black King\n");
-        System.out.print("\u265B");System.out.print(" Black Queen\n");
-        System.out.print("\u265C");System.out.print(" Black Rook\n");
-        System.out.print("\u265D");System.out.print(" Black Bishop\n");
-        System.out.print("\u265E");System.out.print(" Black Knight \n");
-        System.out.print("\u265F");System.out.print(" Black Pawn\n");
+    }
+        System.out.println("  _ _ _ _ _ _ _ _ _");
+        System.out.println("   A B C D E F G H");
 
 
     }
+    public static void main(String[] args) {
+        Piece player = new Piece();
+        resetBoard(player);
+        printBoard();
+
+    }
+
+    private static void resetBoard(Piece player){
+
+
+        // SET WHITE PIECES FOR INITIAL GAMEBOARD
+        // set pawns
+        for (int j = 0; j < 8; j++) {
+            board[1][j] = player.choosePiece("pawn", "white");
+        }
+
+        //set rooks
+        for (int k = 0; k < 8; k +=7) {
+            board[0][k] = player.choosePiece("rook", "white");
+        }
+
+        // set bishops
+        for (int k = 1; k < 8; k +=5) {
+            board[0][k] = player.choosePiece("bishop", "white");
+        }
+
+        // set knights
+        for (int k = 2; k < 8; k +=3) {
+            board[0][k] = player.choosePiece("knight", "white");
+        }
+        board[0][3] = player.choosePiece("queen", "white");
+        board[0][4] = player.choosePiece("king", "white");
+
+        // SET Black PIECES FOR INITIAL GAMEBOARD
+        for (int j = 0; j < 8; j++) {
+            board[6][j] = player.choosePiece("pawn", "black");
+        }
+        //set rooks
+        for (int k = 0; k < 8; k +=7) {
+            board[7][k] = player.choosePiece("rook", "black");
+        }
+
+        // set bishops
+        for (int k = 1; k < 8; k +=5) {
+            board[7][k] = player.choosePiece("bishop", "black");
+        }
+
+        // set knights
+        for (int k = 2; k < 8; k +=3) {
+            board[7][k] = player.choosePiece("knight", "black");
+        }
+        board[7][3] = player.choosePiece("queen", "black");
+        board[7][4] = player.choosePiece("king", "black");
+    }
 }
+
+
